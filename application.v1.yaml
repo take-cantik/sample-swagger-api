@@ -1,0 +1,64 @@
+openapi: 3.0.0
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/take-cantik/sample/1.0.0
+info:
+  description: This is a simple API
+  version: "1.0.0"
+  title: Simple Inventory API
+  contact:
+    name: take_cantik
+tags:
+  - name: events
+    description: events
+  - name: talks
+    description: talks
+  - name: users
+    description: users
+paths:
+  /api/events:
+    get:
+      tags:
+        - events
+      summary: get all events
+      operationId: get-event_list
+      description: api to get events
+      parameters:
+        - in: query
+          name: page
+          description: page
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            example: 1
+        - in: query
+          name: limit
+          description: number of acquisitions
+          schema:
+            type: integer
+            minimum: 0
+            example: 10
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/event_list_response'
+              examples:
+                example-1:
+                  current_page: 1
+                  last_page: 2
+    post:
+components:
+  schemas:
+    event_list_response:
+      type: object
+      required:
+        - id
+        - name
+        - manufacturer
+        - releaseDate
+      properties:
